@@ -9,8 +9,14 @@ import { HeartPulse, ShieldAlert, Activity, Zap, Thermometer, Clock, AlertTriang
 export default function ContactHealthPage() {
   const { health, sensor, history } = useArcwise();
 
-  if (!health || !sensor || history.length === 0) return null;
-
+  if (!health || !sensor || history.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 text-slate-400">
+        <Activity className="w-8 h-8 mb-4 animate-pulse text-brand-500" />
+        <p>Loading ARCWISE telemetry...</p>
+      </div>
+    );
+  }
   const chartData = history.map(s => ({
     time: new Date(s.timestamp).toLocaleTimeString([], { second: '2-digit', minute: '2-digit' }),
     chi: s.chi,

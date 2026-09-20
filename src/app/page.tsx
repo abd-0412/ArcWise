@@ -11,7 +11,14 @@ import { Thermometer, Zap, Activity, Heart, ShieldAlert, Cpu } from 'lucide-reac
 export default function DashboardPage() {
   const { sensor, health, system, events } = useArcwise();
 
-  if (!sensor || !health || !system) return null;
+  if (!sensor || !health || !system) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 text-slate-400">
+        <Activity className="w-8 h-8 mb-4 animate-pulse text-brand-500" />
+        <p>Initializing ARCWISE Engine...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">
