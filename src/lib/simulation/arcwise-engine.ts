@@ -88,21 +88,52 @@ export class ArcwiseEngine {
         eventType = 'EARLY_DEGRADATION';
         severity = 'LOW';
         action = 'Monitoring intensified';
+        this.health.chi = 75;
+        this.health.tri = 85;
+        this.sensor.temperature = this.baselineTemp + 2;
+        this.sensor.acousticLevel = 15;
+        this.health.degradation = 20;
+        this.health.state = 'EARLY_DEGRADATION';
+        this.system.safetyState = 'MONITOR';
         break;
       case 'UNSTABLE':
         eventType = 'UNSTABLE_CONTACT';
         severity = 'MEDIUM';
         action = 'Maintenance recommended';
+        this.health.chi = 60;
+        this.health.tri = 70;
+        this.sensor.temperature = this.baselineTemp + 6;
+        this.sensor.acousticLevel = 35;
+        this.health.degradation = 40;
+        this.health.state = 'UNSTABLE_CONTACT';
+        this.system.safetyState = 'WARNING';
         break;
       case 'PRE_ARC':
         eventType = 'PRE_ARC_RISK';
         severity = 'HIGH';
         action = 'High Risk Warning Issued';
+        this.health.chi = 45;
+        this.health.tri = 50;
+        this.sensor.temperature = this.baselineTemp + 12;
+        this.sensor.acousticLevel = 65;
+        this.health.degradation = 60;
+        this.health.state = 'PRE_ARC_RISK';
+        this.system.safetyState = 'HIGH_RISK';
         break;
       case 'CRITICAL':
         eventType = 'CRITICAL_CONTACT';
         severity = 'CRITICAL';
         action = 'Initiating Load Isolation';
+        this.health.chi = 15;
+        this.health.tri = 20;
+        this.sensor.temperature = this.baselineTemp + 20;
+        this.sensor.acousticLevel = 90;
+        this.health.degradation = 85;
+        this.health.state = 'CRITICAL';
+        this.system.safetyState = 'CRITICAL';
+        this.system.loadStatus = 'ISOLATED';
+        this.system.ssrStatus = 'OFF';
+        this.system.latestAction = 'LOAD ISOLATED (SIMULATED)';
         break;
     }
 

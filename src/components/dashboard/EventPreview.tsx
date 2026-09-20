@@ -27,8 +27,12 @@ export default function EventPreview({ events }: EventPreviewProps) {
             <li key={event.id} className="p-4 hover:bg-slate-50 transition-colors">
               <div className="flex justify-between items-start mb-1">
                 <StatusBadge 
-                  status={event.severity.toLowerCase() as 'info' | 'warning' | 'danger'} 
-                  text={event.type.replace('_', ' ')} 
+                  status={
+                    event.severity === 'CRITICAL' ? 'danger' :
+                    event.severity === 'HIGH' || event.severity === 'MEDIUM' ? 'warning' :
+                    'info'
+                  } 
+                  text={event.type.replace(/_/g, ' ')} 
                 />
                 <span className="text-xs text-slate-400">
                   {new Date(event.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

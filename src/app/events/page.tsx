@@ -77,7 +77,11 @@ export default function EventHistoryPage() {
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
                       <div className="flex items-center gap-2 flex-wrap">
                         <StatusBadge 
-                          status={event.severity.toLowerCase() as 'info' | 'warning' | 'danger'} 
+                          status={
+                            event.severity === 'CRITICAL' ? 'danger' :
+                            event.severity === 'HIGH' || event.severity === 'MEDIUM' ? 'warning' :
+                            'info'
+                          } 
                           text={event.type.replace(/_/g, ' ')} 
                         />
                         <span className="text-sm font-semibold text-brand-900">{new Date(event.timestamp).toLocaleTimeString()}</span>
